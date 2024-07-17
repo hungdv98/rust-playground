@@ -1,0 +1,10 @@
+[package]
+name = "rust_fortune_teller"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ask_gemini = "0.1.4"
+rand = "0.8.5"
+serde = { version = "1.0.204", features = ["derive"] }
+tokio = "1.38.1"
