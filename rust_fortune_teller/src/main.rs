@@ -5,8 +5,7 @@ use rand;
 use rand::seq::SliceRandom;
 use ask_gemini::Gemini;
 use std::fmt::Write;
-
-const GEMINI_API_KEY: &str = "changeMe";
+use dotenv::dotenv;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub enum Suit {
@@ -131,6 +130,11 @@ fn format_reading(reading: &[String]) -> String {
 
 #[tokio::main]
 async fn main() {
+    dotenv().ok();
+
+    let gemini_api_key = std::env::var("GEMINI_API_KEY")
+        .expect("GEMINI_API_KEY must be set");
+
     println!("[INFO] Welcome to Vadar Fortune Teller!");
     println!("[INFO] Please let me know your name: ");
     let mut username = String::new();
@@ -169,7 +173,7 @@ async fn main() {
     
     // println!("PROMPTS = {prompt}");
 
-    let gemini = Gemini::new(Some(GEMINI_API_KEY), None);
+    let gemini = Gemini::new(Some(&gemini_api_key), None);
     match gemini.ask(&prompt).await {
         Ok(response) => {
             //println!("[INFO] Signal from the universe: \n {:?}", response);
