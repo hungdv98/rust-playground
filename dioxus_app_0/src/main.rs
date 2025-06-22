@@ -7,5 +7,9 @@ fn main() {
 }
 
 fn App() -> Element {
-    rsx!("Hello World!")
+    rsx!(
+        div { 
+            h1 { "Hello World!" }
+        }
+    )
 }
